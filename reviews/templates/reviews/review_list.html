@@ -4,6 +4,8 @@
 
 {% block content %}
     <ul>
+        {% comment %} object list is used here because ListView gets the model data with this specific name {% endcomment %}
+        {% comment %} {% for review in object_list %}  {% endcomment %}
         {% for review in reviews %}
             <li>{{ review.user_name }} (Rating: {{ review.rating }})</li>
         {% endfor %}
