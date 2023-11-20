@@ -5,26 +5,20 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import CreateView
 
 from .forms import ReviewForm
 from .models import Review
 
 # Create your views here.
 
-class ReviewView(FormView):
-    # put in consideratin that this FormView does not know what to do with the specific data. 
-    # you could want it to be saved to a file or anything else. 
-    # that is why we use the form_valid method.
+class ReviewView(CreateView):
+    # we can specify either fields or form classes
+    model = Review
     form_class = ReviewForm
     template_name = "reviews/review.html"
     success_url = "/thank-you"
-
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
     
-
 
 
 class ThankYouView(TemplateView):
